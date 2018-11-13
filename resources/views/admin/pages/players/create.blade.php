@@ -95,6 +95,19 @@
                             </div>
                         </div>
                         <!-- salary -->
+                        <div class="form-group row">
+                            <label for="salary" class="col-sm-4 col-form-label text-md-right">{{ __('Total salary') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="salary" type="text" class="form-control{{ $errors->has('salary') ? ' is-invalid' : '' }}" name="salary" value="{{ old('salary') }}" required autofocus>
+
+                                @if ($errors->has('salary'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('salary') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
