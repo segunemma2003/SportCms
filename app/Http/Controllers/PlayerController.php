@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Player;
 use Illuminate\Http\Request;
 use Session;
+use App\Team;
 class PlayerController extends Controller
 {
     /**
@@ -25,7 +26,8 @@ class PlayerController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.players.create');
+        $teams=Team::all();
+        return view('admin.pages.players.create',compact('teams'));
     }
 
     /**
@@ -39,8 +41,8 @@ class PlayerController extends Controller
         $this->validate($request,[
             'name'=>'required|string',
             'dob'=>'required|date',
-            'picture'=>'required|image|max:4999',
-            'welcome_video'=>'required|mimes:mp4,3gp,mpeg',
+            'picture'=>'required|image',
+            'welcome_video'=>'mimes:mp4,3gp,mpeg',
             'years_of_contract'=>'required',
             'salary'=>'required',
             'year_signed'=>'required',
@@ -51,7 +53,7 @@ class PlayerController extends Controller
             $filenameWithoutExt=pathinfo($filename, PATHINFO_FILENAME);
             $extension=$request->file('picture')->getClientOriginalExtension();
             $filenameToStore=$filenameWithoutExt.'_'.time().'.'.$extension;
-            $request->file($picture)->storeAs('public/upload',$filenameToStore);
+            $request->file('picture')->storeAs('public/upload/players',$filenameToStore);
         }
         $player=new Player([
             'name'=>$request->name,
@@ -61,7 +63,7 @@ class PlayerController extends Controller
             'shirt_number'=>$request->shirt_number,
             'picture'=>$filenameToStore,
             'welcome_video'=>$request->welcome_video,
-            'year_of_contract'=>$request->year_of_contract,
+            'years_of_contract'=>$request->years_of_contract,
             'salary'=>$request->salary,
             'year_signed'=>$request->year_signed,
             'team_id'=>$request->team_id,
@@ -95,10 +97,11 @@ class PlayerController extends Controller
      * @param  \App\Player  $player
      * @return \Illuminate\Http\Response
      */
-    public function edit(Player $player)
+    public function edit($player)
     {
+        $teams=Team::all();
         $player=Player::whereId($player)->first();
-        return view('admin.pages.players.update',compact('player'));
+        return view('admin.pages.players.update',compact('player','teams'));
 
     }
 
@@ -109,7 +112,7 @@ class PlayerController extends Controller
      * @param  \App\Player  $player
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Player $player)
+    public function update(Request $request,$player)
     {
         $player=Player::whereId($player)->first();    
         if($request->hasFile('picture')){
@@ -117,16 +120,17 @@ class PlayerController extends Controller
             $filenameWithoutExt=pathinfo($filename, PATHINFO_FILENAME);
             $extension=$request->file('picture')->getClientOriginalExtension();
             $filenameToStore=$filenameWithoutExt.'_'.time().'.'.$extension;
-            $request->file($picture)->storeAs('public/upload',$filenameToStore);
+            $request->file($picture)->storeAs('public/upload/players',$filenameToStore);
+            $player->picture=$filenameToStore;
         }
         $player->name=$request->name;
         $player->dob=$request->dob;
         $player->weight=$request->weight;
         $player->height=$request->height;
         $player->shirt_number=$request->shirt_number;
-        $player->picture=$filenameToStore;
+        
         $player->welcome_video=$request->welcome_video;
-        $player->year_of_contract=$request->year_of_contract;
+        $player->years_of_contract=$request->years_of_contract;
         $player->salary=$request->salary;
         $player->year_signed=$request->year_signed;
         $player->team_id=$request->team_id;
@@ -146,8 +150,16 @@ class PlayerController extends Controller
      * @param  \App\Player  $player
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Player $player)
+    public function destroy($player)
     {
-        //
+        $player=Player::whereId($player)->first();
+        if($player->delete()){
+            Session::flash('success','You have successfully deleted a player');
+            return redirect()->back();
+        }else{
+            Session::flash('error','Opps something went wrong!!!');
+            return redirect()->back();
+        }
+
     }
 }

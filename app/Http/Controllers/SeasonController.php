@@ -14,8 +14,8 @@ class SeasonController extends Controller
      */
     public function index()
     {
-        $season=Season::all();
-        return view('admin.pages.season.index',compact('season'));
+        $seasons=Season::all();
+        return view('admin.pages.season.index',compact('seasons'));
     }
 
     /**
@@ -56,7 +56,7 @@ class SeasonController extends Controller
      * @param  \App\Season  $season
      * @return \Illuminate\Http\Response
      */
-    public function show(Season $season)
+    public function show($season)
     {
         $season=Season::whereId($season)->first();
         return view('admin.pages.season.show',compact('season'));
@@ -68,7 +68,7 @@ class SeasonController extends Controller
      * @param  \App\Season  $season
      * @return \Illuminate\Http\Response
      */
-    public function edit(Season $season)
+    public function edit($season)
     {
         $season=Season::whereId($season)->first();
         return view('admin.pages.season.edit',compact('season'));
@@ -81,7 +81,7 @@ class SeasonController extends Controller
      * @param  \App\Season  $season
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Season $season)
+    public function update(Request $request,$season)
     {
         $season=Season::whereId($season)->first();
         $season->season=$request->season;
@@ -101,8 +101,16 @@ class SeasonController extends Controller
      * @param  \App\Season  $season
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Season $season)
+    public function destroy($season)
     {
-        //
+        $season=Season::whereId($season)->first();
+        if($season->delete()){
+            Session::flash('success','you have successfully updated the season');
+            return redirect()->back();
+        }else{
+            Session::flash('error','Opps, Something went wrong!!!');
+            return redirect()->back();
+        }
+
     }
 }

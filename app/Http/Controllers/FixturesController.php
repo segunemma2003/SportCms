@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Team;
+use App\Season;
+use App\Category;
 use App\Fixtures;
 use Illuminate\Http\Request;
 use Session;
@@ -25,7 +27,10 @@ class FixturesController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.fixtures.create');
+        $teams=Team::all();
+        $seasons=Season::all();
+        $category=Category::all();
+        return view('admin.pages.fixtures.create',compact('teams','seasons','category'));
     }
 
     /**
@@ -40,7 +45,7 @@ class FixturesController extends Controller
             'home'=>'required|integer',
             'away'=>'required|integer',
             'date'=>'required|date',
-            'season_id'=>'required|integer',
+            'season'=>'required|integer',
             'competition'=>'required|integer',
 
         ]);
@@ -48,7 +53,7 @@ class FixturesController extends Controller
         $fixture->home=$request->home;
         $fixture->away=$request->away;
         $fixture->date=$request->date;
-        $fixture->season_id=$request->season_id;
+        $fixture->season_id=$request->season;
         $fixture->competition=$request->competition;
         if($fixture->save()){
             Session::flash('success','You have successfully added a fixture');

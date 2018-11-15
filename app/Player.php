@@ -13,11 +13,11 @@ class Player extends Model
 
     public function current()
     {
-        return  $this->belongsTo('App\Team');
+        return  $this->belongsTo('App\Team','team_id','id');
     }
     public function former()
     {
-        return  $this->belongsTo('App\Team');
+        return  $this->belongsTo('App\Team','former_club','id');
     }
     public function scorer()
     {

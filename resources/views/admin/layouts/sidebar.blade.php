@@ -51,7 +51,17 @@
                             </li> -->
                         </ul>
                     </li>
-                        					                   
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap fa-3x"></i>Seasons<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{{route('season.index')}}">All Seasons</a>
+                            </li>
+                            <li>
+                                <a href="{{route('season.create')}}">Add Season</a>
+                            </li>
+                        </ul>
+                    </li>                        					                   
                     <li>
                         <a href="#"><i class="fa fa-sitemap fa-3x"></i>Fixtures<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
