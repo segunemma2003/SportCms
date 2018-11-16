@@ -119,6 +119,36 @@
                                 @endif
                             </div>
                         </div>
+                        <!-- tim -->
+                        <div class="form-group row">
+                            <label for="time" class="col-sm-4 col-form-label text-md-right">{{ __('Time') }}</label>
+
+                            <div class="col-md-6">
+                            <input id="time" type="time" class="form-control{{ $errors->has('time') ? ' is-invalid' : '' }}" name="time" required>
+                                
+
+                                @if ($errors->has('time'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('time') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <!-- venue -->
+                        <div class="form-group row">
+                            <label for="venue" class="col-sm-4 col-form-label text-md-right">{{ __('Venue') }}</label>
+
+                            <div class="col-md-6">
+                            <input id="venue" type="text" class="form-control{{ $errors->has('venue') ? ' is-invalid' : '' }}" name="venue" required>
+                                
+
+                                @if ($errors->has('venue'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('venue') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

@@ -16,7 +16,7 @@ class FixturesController extends Controller
      */
     public function index()
     {
-        $fixtures=Fixtures::all();
+        $fixtures=Fixtures::orderBy('date','desc')->get();
         return view('admin.pages.fixtures.index',compact('fixtures'));
     }
 
@@ -45,6 +45,8 @@ class FixturesController extends Controller
             'home'=>'required|integer',
             'away'=>'required|integer',
             'date'=>'required|date',
+            'time'=>'required',
+            'venue'=>'required',
             'season'=>'required|integer',
             'competition'=>'required|integer',
 
@@ -52,6 +54,8 @@ class FixturesController extends Controller
         $fixture=new Fixtures;
         $fixture->home=$request->home;
         $fixture->away=$request->away;
+        $fixture->time=$request->time;
+        $fixture->venue=$request->venue;
         $fixture->date=$request->date;
         $fixture->season_id=$request->season;
         $fixture->competition=$request->competition;
@@ -82,10 +86,13 @@ class FixturesController extends Controller
      * @param  \App\Fixtures  $fixtures
      * @return \Illuminate\Http\Response
      */
-    public function edit(Fixtures $fixtures)
+    public function edit($fixtures)
     {
         $fixture=Fixtures::whereId($fixtures)->first();
-        return view('admin.pages.fixtures.edit',compact('fixture'));
+        $teams=Team::all();
+        $seasons=Season::all();
+        $category=Category::all();
+        return view('admin.pages.fixtures.edit',compact('fixture','teams','seasons','category'));
     }
 
     /**
@@ -95,14 +102,16 @@ class FixturesController extends Controller
      * @param  \App\Fixtures  $fixtures
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Fixtures $fixtures)
+    public function update(Request $request,$fixtures)
     {
         
         $fixture=Fixtures::whereId($fixtures)->first();
         $fixture->home=$request->home;
         $fixture->away=$request->away;
         $fixture->date=$request->date;
-        $fixture->season_id=$request->season_id;
+        $fixture->time=$request->time;
+        $fixture->venue=$request->venue;
+        $fixture->season_id=$request->season;
         $fixture->competition=$request->competition;
         if($fixture->save()){
             Session::flash('success','You have successfully added a fixture');
@@ -119,8 +128,15 @@ class FixturesController extends Controller
      * @param  \App\Fixtures  $fixtures
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Fixtures $fixtures)
+    public function destroy($fixtures)
     {
-        //
+        $fixture=Fixtures::whereId($fixtures)->first();
+        if($fixture->delete()){
+            Session::flash('success','You have successfully deleted a fixture');
+            return redirect()->back();
+        }else{
+            Session::flash('error','Opps something went wrong!!!!');
+            return redirect()->back     ();
+        }
     }
 }

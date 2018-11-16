@@ -10,18 +10,18 @@ class Fixtures extends Model
     protected $guarded=['id'];
 
 
-    public function competition()
+    public function competitions()
     {
-        return $this->belongsTo('App\Category');
+        return $this->belongsTo('App\Category','competition','id');
     }
-    public function season(){
-        return $this->belongsTo('App\Season');
+    public function seasons(){
+        return $this->belongsTo('App\Season','season_id','id');
     }
-    public function home(){
-        return $this->belongsTo('App\Team');
+    public function homeTeam(){
+        return $this->belongsTo('App\Team','home','id');
     }
-    public function away(){
-        return $this->belongsTo('App\Team');
+    public function awayTeam(){
+        return $this->belongsTo('App\Team','away','id');
     }
     public function scorer()
     {
