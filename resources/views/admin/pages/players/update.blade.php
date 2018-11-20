@@ -11,6 +11,7 @@
                     <div class="alert alert-danger">{{$error}}</div>
                     @endforeach
                 @endif
+                <div>{{session('success')}}</div>
                 <div class="panel-body">
                     <form method="POST" enctype="multipart/form-data">
                         @csrf
@@ -127,8 +128,27 @@
                             </div>
                         </div>
                         <!-- team_id -->
-                                <input  type="hidden" name="team_id" value="1">
+                        <div class="form-group row">
+                            <label for="team_id" class="col-sm-4 col-form-label text-md-right">{{ __('Current Club') }}</label>
 
+                            <div class="col-md-6">
+                                <select id="team_id" class="form-control{{ $errors->has('team_id') ? ' is-invalid' : '' }}" name="team_id" value="{{ $player->team_id}}">
+                                    @if($teams)
+                                        @foreach($teams as $team)
+                                            <option value="{{$team->id}}">{{$team->name}}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                                <!-- <small class="text-success">if None, just pick Enyimba fc</small> -->
+
+                                @if ($errors->has('team_id'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('team_id') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
+                        </div>
                                 
                         <!-- former club -->
                         <div class="form-group row">
@@ -144,9 +164,9 @@
                                 </select>
                                 <small class="text-success">if None, just pick Enyimba fc</small>
 
-                                @if ($errors->has('year_signed'))
+                                @if ($errors->has('former_club'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('year_signed') }}</strong>
+                                        <strong>{{ $errors->first('former_club') }}</strong>
                                     </span>
                                 @endif
                             </div>

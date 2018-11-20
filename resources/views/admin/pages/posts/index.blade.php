@@ -29,7 +29,7 @@
                             <tr>
                                 <td>{{$loop->index+1}}</td>
                                 <td>{!! $post->title !!}</td>
-                                <td>{!! $post->body !!}</td>
+                                <td>{!!str_limit($post->body,120,$end=' ......') !!}</td>
                                 <td>{{$post->user->name}}</td>
                                 <td><img class="img img-responsive img-circle" width="100px" height="100px" src='/storage/upload/{{$post->title_image}}'/></td>
                                 <td>

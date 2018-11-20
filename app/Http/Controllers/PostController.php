@@ -5,6 +5,8 @@ use Auth;
 use App\Post;
 use Illuminate\Http\Request;
 use Session;
+use App\Fixtures;
+use App\Allcategory;
 class PostController extends Controller
 {
     /**
@@ -25,7 +27,9 @@ class PostController extends Controller
      */
     public function create()
     {
-     return view('admin.pages.posts.create');
+    $fixtures=Fixtures::all();
+    $allcategory=Allcategory::all();
+     return view('admin.pages.posts.create',compact('allcategory','fixtures'));
     }
 
     /**
@@ -42,6 +46,8 @@ class PostController extends Controller
             'title'=>'required|string',
             'title_image'=>'image',
             'body'=>'required',
+            'category'=>'required',
+            'summary'=>'required'
         ]);
         // dd($request->all()); 
         $filenameToStore='';
@@ -54,13 +60,22 @@ class PostController extends Controller
         }
         $posts=new Post;
         $user=\App\User::whereId(Auth::user()->id)->first(); 
+        $category=\App\Allcategory::whereId($request->category)->first();
         $posts->title=$request->title;
         $posts->user_id=Auth::user()->id;
         $posts->title_image=$filenameToStore;
         $posts->body=\Purifier::clean($request->body);
+        $posts->summary=\Purifier::clean($request->summary);
+        $posts->fixture_id=$request->fixture;
+
         if($posts->save()){
-            Session::flash('success','You have to be successfully added to database');
+            if($posts->category()->attach($category)){            Session::flash('success','You have to be successfully added to database');
             return redirect()->back();
+            }
+            else{
+                Session::flash('error','Opps, something went wrong');
+                return redirect()->back();
+            }
         }else{
             Session::flash('error','Opps, something went wrong');
             return redirect()->back();

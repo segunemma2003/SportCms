@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomepageController@index');
 
 Auth::routes();
 
@@ -58,12 +56,12 @@ Route::group(['middleware'=>'auth','prefix'=>'admin'],function(){
     Route::post('/post/{id}/edit','PostController@update')->name('post.update');
     Route::get('/post/{id}/delete','PostController@destroy')->name('post.delete');
     //scorer
-    Route::get('/scorer','Scorercontroller@index')->name('scorer.index');
-    Route::get('/scorer/create','Scorercontroller@create')->name('scorer.create');
-    Route::post('/scorer/create','Scorercontroller@store')->name('scorer.store');
-    Route::get('/scorer/{id}/edit','Scorercontroller@edit')->name('scorer.edit');
-    Route::post('/scorer/{id}/edit','Scorercontroller@update')->name('scorer.update');
-    Route::get('/scorer/{id}/delete','Scorercontroller@destroy')->name('scorer.delete');
+    Route::get('/scorer','ScorerController@index')->name('scorer.index');
+    Route::get('/scorer/create/{id}','ScorerController@create')->name('scorer.create');
+    Route::post('/scorer/create/{id}','ScorerController@store')->name('scorer.store');
+    Route::get('/scorer/{id}/edit','ScorerController@edit')->name('scorer.edit');
+    Route::post('/scorer/{id}/edit','ScorerController@update')->name('scorer.update');
+    Route::get('/scorer/{id}/delete','ScorerController@destroy')->name('scorer.delete');
     //season
     Route::get('/season','SeasonController@index')->name('season.index');
     Route::get('/season/create','SeasonController@create')->name('season.create');
@@ -78,4 +76,12 @@ Route::group(['middleware'=>'auth','prefix'=>'admin'],function(){
     Route::get('/team/{id}/edit','TeamController@edit')->name('team.edit');
     Route::post('/team/{id}/edit','TeamController@update')->name('team.update');    
     Route::get('/team/{id}/delete','TeamController@destroy')->name('team.delete');
+
+    //allcategories
+    Route::get('/allcat','AllcategoryController@index')->name('allcat');
+    Route::get('/allcat/create','AllcategoryController@create')->name('allcat.create');
+    Route::post('/allcat/create','AllcategoryController@store')->name('allcat.store');
+    Route::get('/allcat/{id}/edit','AllcategoryController@edit')->name('allcat.edit');
+    Route::post('/allcat/{id}/edit','AllcategoryController@update')->name('allcat.update');    
+    Route::get('/allcat/{id}/delete','AllcategoryController@destroy')->name('allcat.delete');
 });

@@ -22,6 +22,6 @@ class Team extends Model
     }
     public function current()
     {
-        return  $this->hasMany('App\Player', 'team_id');
+        return  $this->hasMany('App\Player', 'id','team_id');
     }
 }

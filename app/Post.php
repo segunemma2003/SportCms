@@ -22,4 +22,8 @@ class Post extends Model
     {
         return  $this->hasMany('App\Gallery');
     }
+    public function category()
+    {
+        return  $this->belongsToMany('App\Allcategory','posts_allcategories')->withTimestamps();
+    }
 }

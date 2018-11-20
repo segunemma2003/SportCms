@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Fixtures;
 use App\Scorer;
 use Illuminate\Http\Request;
 
@@ -22,9 +22,10 @@ class ScorerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $fixture=Fixtures::whereId($id)->first();
+            return view('admin.pages.scorers.create',compact('fixture'));    
     }
 
     /**
@@ -33,7 +34,7 @@ class ScorerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$id)
     {
         //
     }

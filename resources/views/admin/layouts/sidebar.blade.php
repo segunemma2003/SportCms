@@ -96,6 +96,18 @@
                             </li>
                         </ul>
                     </li>
+
+                      <li>
+                        <a href=""><i class="fa fa-sitemap fa-3x"></i>Category<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                            <a href="{{route('allcat')}}">View Category</a>
+                            </li>
+                            <li>
+                                <a href="{{route('allcat.create')}}">Add Category</a>
+                            </li>
+                        </ul>
+                    </li>
                     <li>
                         <a href="#"><i class="fa fa-group fa-3x"></i>Players<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">

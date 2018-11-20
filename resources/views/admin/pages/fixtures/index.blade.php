@@ -38,7 +38,9 @@
                                 <td>{{$fixture->time}}</td>
                                 <td>
                                     <a href="{{route('fixture.edit',$fixture->id)}}" class="btn btn-primary">Edit</a>
+                                    <a href="{{route('scorer.create',$fixture->id)}}" class="btn btn-info">Add Score</a>
                                     <a href="{{route('fixture.delete',$fixture->id)}}" class="btn btn-danger">Delete</a>
+                                    
                                 </td>
                             </tr>
                             @endforeach

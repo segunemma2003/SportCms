@@ -120,21 +120,29 @@ class PlayerController extends Controller
             $filenameWithoutExt=pathinfo($filename, PATHINFO_FILENAME);
             $extension=$request->file('picture')->getClientOriginalExtension();
             $filenameToStore=$filenameWithoutExt.'_'.time().'.'.$extension;
-            $request->file($picture)->storeAs('public/upload/players',$filenameToStore);
+            $request->file('picture')->storeAs('public/upload/players',$filenameToStore);
             $player->picture=$filenameToStore;
         }
+        // dd($request->team_id);
         $player->name=$request->name;
         $player->dob=$request->dob;
         $player->weight=$request->weight;
         $player->height=$request->height;
         $player->shirt_number=$request->shirt_number;
-        
+        // dd($request->team_id);
+        $player->team_id=$request->team_id;
+        $player->former_club=$request->former_club;
         $player->welcome_video=$request->welcome_video;
         $player->years_of_contract=$request->years_of_contract;
         $player->salary=$request->salary;
         $player->year_signed=$request->year_signed;
-        $player->team_id=$request->team_id;
-        $player->former_club=$request->former_club;
+        // $teamc=\App\Team::whereId($request->team_id)->first();
+        // $teamf=\App\Team::whereId($request->former_club)->first();
+        // dd($teamf);
+        // $player->updateExistingPivot(['former_club'=>$request->former_club,'team_id'=>$request->team_id]);
+        // $teamc->current->update();
+       
+        // $player->former->update(['team_id'=>$request->team_id,'former_club'=>$request->former_club]);
         if($player->save()){
             Session::flash('success','Your have successfully added a player');
             return redirect()->back();

@@ -38,6 +38,20 @@
                                 @endif
                             </div>
                         </div>
+                        <!-- summary -->
+                        <div class="form-group row">
+                            <label for="summary" class="col-sm-2 col-form-label text-md-right">{{ __('Summary') }}</label>
+
+                            <div class="col-md-8">
+                                <textarea class="form-control{{ $errors->has('body') ? ' is-invalid' : '' }}" name="summary" value="{{ old('summary') }}"></textarea>
+
+                                @if ($errors->has('summary'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('summary') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
                         <!-- title image -->
                         <div class="form-group row">
                             <label for="title_image" class="col-sm-2 col-form-label text-md-right">{{ __('Image post') }}</label>
@@ -52,7 +66,46 @@
                                 @endif
                             </div>
                         </div>
+                        <!-- catefory news -->
+                        <div class="form-group row">
+                            <label for="category" class="col-sm-2 col-form-label text-md-right">{{ __('Category') }}</label>
 
+                            <div class="col-md-8">
+                                  <select id="category"  class="form-control{{ $errors->has('category') ? ' is-invalid' : '' }}" name="category" value="{{ old('category') }}" autofocus>
+                                  <option></option>
+                                  @if($allcategory)
+                                    @foreach($allcategory as $categ)
+                                    <option value="{{$categ->id}}">{{$categ->name}}</option>
+                                    @endforeach
+                                  @endif
+                                    </select>
+                                @if ($errors->has('category'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('category') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <!-- team fixture -->
+                        <div class="form-group row">
+                            <label for="fixture" class="col-sm-2 col-form-label text-md-right">{{ __('Related Fixture') }}</label>
+
+                            <div class="col-md-8">
+                                  <select id="fixture"  class="form-control{{ $errors->has('fixture') ? ' is-invalid' : '' }}" name="fixture" value="{{ old('fixture') }}" autofocus>
+                                  <option></option>
+                                  @if($fixtures)
+                                    @foreach($fixtures as $categ)
+                                    <option value="{{$categ->id}}">{{$categ->homeTeam->name}} VS {{$categ->awayTeam->name}}</option>
+                                    @endforeach
+                                  @endif
+                                    </select>
+                                @if ($errors->has('category'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('category') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
