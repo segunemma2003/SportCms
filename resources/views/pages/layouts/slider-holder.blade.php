@@ -42,9 +42,10 @@
 
 <!-- Indicators -->
 <ul class="carousel-indicators">
+@foreach($post as$postw)
 <li data-target="#animated-slider" data-slide-to="0" class="active"></li>
 <li data-target="#animated-slider" data-slide-to="1"></li>
-
+@endforeach
 </ul>
 <!-- Indicators -->
 

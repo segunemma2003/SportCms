@@ -106,6 +106,21 @@
                                 @endif
                             </div>
                         </div>
+                        <!-- other images to attach -->
+                        <div class="form-group row">
+                            <label for="all_image" class="col-sm-2 col-form-label text-md-right">{{ __('Other Images') }}</label>
+
+                            <div class="col-md-8">
+                                <input id="all_image" type="file" class="form-control{{ $errors->has('all_image') ? ' is-invalid' : '' }}" name="all_image[]" value="{{ old('all_image[]') }}" autofocus multiple>
+
+                                @if ($errors->has('all_image'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('all_image') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <!-- stop -->
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

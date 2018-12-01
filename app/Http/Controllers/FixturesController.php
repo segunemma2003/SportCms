@@ -58,6 +58,7 @@ class FixturesController extends Controller
         $fixture->venue=$request->venue;
         $fixture->date=$request->date;
         $fixture->season_id=$request->season;
+        $fixture->matchday=$request->matchday;
         $fixture->competition=$request->competition;
         if($fixture->save()){
             Session::flash('success','You have successfully added a fixture');

@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Post;
 use Illuminate\Http\Request;
+use App\Http\Requests\PostRequest;
 use Session;
 use App\Fixtures;
+use App\Gallery;
+use Image;
 use App\Allcategory;
 class PostController extends Controller
 {
@@ -38,17 +41,18 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
        
         
-        $this->validate($request,[
-            'title'=>'required|string',
-            'title_image'=>'image',
-            'body'=>'required',
-            'category'=>'required',
-            'summary'=>'required'
-        ]);
+        // $this->validate($request,[
+        //     'title'=>'required|string',
+        //     'title_image'=>'image|mimes:jpeg,bmp,png|size:2000',
+        //     'body'=>'required',
+        //     'category'=>'required',
+        //     'summary'=>'required',
+        //     'all_image'=>'image|mimes:jpeg,bmp,png|size:2000'
+        // ]);
         // dd($request->all()); 
         $filenameToStore='';
         if($request->hasFile('title_image')){
@@ -56,7 +60,8 @@ class PostController extends Controller
             $filenameWithoutExt=pathinfo($filename, PATHINFO_FILENAME);
             $extension=$request->file('title_image')->getClientOriginalExtension();
             $filenameToStore=$filenameWithoutExt.'_'.time().'.'.$extension;
-            $request->file('title_image')->storeAs('public/upload',$filenameToStore);
+            Image::make($request->file('title_image'))->resize(1920,900)->save(storage_path().'/app/public/upload/'.$filenameToStore);
+            // storeAs('public/upload',$filenameToStore);
         }
         $posts=new Post;
         $user=\App\User::whereId(Auth::user()->id)->first(); 
@@ -69,7 +74,29 @@ class PostController extends Controller
         $posts->fixture_id=$request->fixture;
 
         if($posts->save()){
-            if($posts->category()->attach($category)){            Session::flash('success','You have to be successfully added to database');
+            // dd($posts->category()->attach($category));
+            $posts->category()->attach($category);
+                //uploading gallery
+                if($request->hasFile('all_image')){
+                    foreach($request->file('all_image') as $images){
+                    $filename=$images->getClientOriginalName();
+                    $filenameWithoutExt=pathinfo($filename, PATHINFO_FILENAME);
+                    $extension=$images->getClientOriginalExtension();
+                    $filenameToStore=$filenameWithoutExt.'_'.time().'.'.$extension;
+                    $images->storeAs('public/upload',$filenameToStore);
+                    $gallery=new Gallery;
+                    $gallery->file=$filenameToStore;
+                    $gallery->text=$filenameWithoutExt;
+                    // dd($posts->id);
+                    $gallery->post()->associate($posts);
+                    $gallery->save();
+                    
+                    
+                }
+                
+                
+            
+            Session::flash('success','You have to be successfully added to database');
             return redirect()->back();
             }
             else{
