@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Post;
+use App\Fixtures;
 class HomepageController extends Controller
 {
     /**
@@ -14,9 +15,16 @@ class HomepageController extends Controller
     public function index()
     {
         // $posts=Post::whereId(3)->first();
-        $posts=Post::orderBy('created_at','desc')->get();
+        $posts=Post::orderBy('created_at','desc')->take(4)->get();
+        $postss=Post::where('created_at','<=',Carbon::today()->subDays(7))->orderBy('created_at','desc')->get();
+        // dd($postss);
         // dd($posts);
-        return view('pages.pages.index',compact('posts'));
+        $fixturess=Fixtures::where('date','>=',Carbon::now())->take(6)->get();
+        $fixtures=Fixtures::where('home_score','!=',null)->orderBy('date','desc')->first();
+        // ->where('date','<=',Carbon::now())
+        $nextmatch=Fixtures::where('date','>=',Carbon::now())->first();
+        // dd($fixtures);
+        return view('pages.pages.index',compact('posts','fixtures','nextmatch','fixturess','postss'));
     }
 
     /**

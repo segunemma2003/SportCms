@@ -47,9 +47,12 @@
 											<!-- Slider -->
 											<div class="tem tem-0 col-sm-9">
 												<ul id="latest-news-slider" class="latest-news-slider">
-
+													@foreach($postss as $post)
 												    <li>
-													    <img src="" alt="" height="100%" width="100%" vertical-align="text-top">
+													    <img src="/storage/upload/{{$post->title_image}}" alt="" height="100%" width="100%" vertical-align="text-top">
+														<p class="cap-head"><a href="" class="cap-head">{{$post->title}}</a></p>
+													</li>
+													@endforeach	
 					
 												   
 												    
@@ -60,12 +63,12 @@
 											<!-- Thumnail -->
 											<div class="tem tem-0 col-sm-3 lnt">
 												<ul id="latest-news-thumb" class="latest-news-thumb">
-
+												@foreach($postss as $post)
 												    <li>
-													    <p>something</p>
-													    <span class="cap-date"></span>
+													    <p>{{$post->title}}</p>
+													    <span class="cap-date">{{$post->created_at->diffForHumans()}}</span>
 												      </li>
-													  
+												@endforeach	  
 												</ul>
 												<ul class="news-thumb-arrows">
 													<li class="prev"><span class="fa fa-angle-up"></span></li>

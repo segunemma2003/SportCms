@@ -55,15 +55,15 @@
 <div class="position-center-center">
 <div class="container theme-padding">
 <div class="pager-heading match-detail h-white">
-	<span class="pull-left"><img src="main/images/team-logos/KAT.png" alt="" width="270px
+	<span class="pull-left"><img src="/storage/upload/{{$fixtures->homeTeam->file}}" alt="" width="270px
 	" height="280px" class="last-match-logo"></span>
 	<div class="vs-match-heading position-center-center">
-		<strong class="vs-match-result">2<span>-</span>0</strong><span style="text-align: center"></span>
+		<strong class="vs-match-result">{{$fixtures->home_score}}<span>-</span>{{$fixtures->away_score}}</strong><span style="text-align: center"></span>
 		<span class="end-time"><i class="fa fa-clock-o"></i>29' Martins Usule</span>
 	<span class="end-time"><i class="fa fa-clock-o"></i>68' Usman Bara'u</span>
 
 	</div>
-	<span class="pull-right"><img src="main/images/team-logos/ENY.png" alt="" width="280px" height="280px" class="last-match-logo"></span>
+	<span class="pull-right"><img src="/storage/upload/{{$fixtures->awayTeam->file}}" alt="" width="280px" height="280px" class="last-match-logo"></span>
 </div>
 </div>
 </div>

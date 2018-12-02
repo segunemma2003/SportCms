@@ -7,20 +7,24 @@
 <div class="item matches-detail" style="background: url(cdn/img/nxt-match-bg.jpg) no-repeat; background-size: cover;">
 <div class="time-left">
 <ul id="countdown-1" class="countdown">
-	<li>NPFL18 - MD 4</li>
+@if($nextmatch)
+	<li>{{$nextmatch->competitions->nickname}} {{$nextmatch->matchday}}</li>
+@else
+	<li>No more matches</li>
+@endif
 
 </ul>
 </div>
-<span class="left-date"> Wed, Jan 24 | 4:00 PM</span>
+<span class="left-date"> {{ \Carbon\Carbon::parse($nextmatch->date)->format('d,M,Y')}} {{ \Carbon\Carbon::parse($nextmatch->time)->format('H:i:s')}}</span>
 <div class="team-btw-match">
 <ul>
 	<li>
-		<img src="{{ asset('main/images/team-logos/ENY.png') }}" alt="">
-		<span>Enyimba<span>FC</span></span>
+		<img src="/storage/upload/{{$nextmatch->homeTeam->file}}" alt="">
+		<span>{{$nextmatch->homeTeam->name}}</span>
 	</li>
 	<li>
-		<img src="{{ asset('main/images/team-logos/NAS.png') }}" alt="">
-		<span>Nasarawa<span>Utd</span></span>
+		<img src="/storage/upload/{{$nextmatch->awayTeam->file}}" alt="">
+		<span>{{$nextmatch->awayTeam->name}}</span>
 	</li>
 </ul>
 </div>
