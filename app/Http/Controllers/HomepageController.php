@@ -13,10 +13,10 @@ class HomepageController extends Controller
      */
     public function index()
     {
-        $posts=Post::whereId(3)->first();
-        $post=Post::orderBy('created_at','desc')->paginate(1);
+        // $posts=Post::whereId(3)->first();
+        $posts=Post::orderBy('created_at','desc')->get();
         // dd($posts);
-        return view('pages.pages.index',compact('posts','post'));
+        return view('pages.pages.index',compact('posts'));
     }
 
     /**
