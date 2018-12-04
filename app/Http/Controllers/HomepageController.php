@@ -27,6 +27,29 @@ class HomepageController extends Controller
         return view('pages.pages.index',compact('posts','fixtures','nextmatch','fixturess','postss'));
     }
 
+    public function indexx()
+    {
+        $pass=Post::all();
+        return view('news.index', compact('pass'));
+        // $postdetails=Post::whereId($id)->first();
+        // return view('news.index', compact('postdetails'));
+    
+    }
+
+    public function detail()
+    {
+         // $posts=Post::whereId(3)->first();
+         $posts=Post::orderBy('created_at','desc')->take(4)->get();
+         $postss=Post::where('created_at','<=',Carbon::today()->subDays(7))->orderBy('created_at','desc')->get();
+         $fixturess=Fixtures::where('date','>=',Carbon::now())->take(6)->get();
+         $fixtures=Fixtures::where('home_score','!=',null)->orderBy('date','desc')->first();
+         // ->where('date','<=',Carbon::now())
+         $nextmatch=Fixtures::where('date','>=',Carbon::now())->first();
+         // dd($fixtures);
+         return view('news.detail',compact('posts','fixtures','nextmatch','fixturess','postss'));
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -36,6 +59,36 @@ class HomepageController extends Controller
     {
         //
     }
+
+    public function details()
+    {
+        $posts=Post::orderBy('created_at','desc')->take(4)->get();
+        $postss=Post::where('created_at','<=',Carbon::today()->subDays(7))->orderBy('created_at','desc')->get();
+        // dd($postss);
+        // dd($posts);
+        $fixturess=Fixtures::where('date','>=',Carbon::now())->take(6)->get();
+        $fixtures=Fixtures::where('home_score','!=',null)->orderBy('date','desc')->first();
+        // ->where('date','<=',Carbon::now())
+        $nextmatch=Fixtures::where('date','>=',Carbon::now())->first();
+        // dd($fixtures);
+        return view('pages.pages.news-detail',compact('posts','fixtures','nextmatch','fixturess','postss'));
+    }
+
+    public function post()
+    {
+        $posts=Post::orderBy('created_at','desc')->take(4)->get();
+        $postss=Post::where('created_at','<=',Carbon::today()->subDays(7))->orderBy('created_at','desc')->get();
+        // dd($postss);
+        // dd($posts);
+
+        $fixturess=Fixtures::where('date','>=',Carbon::now())->take(6)->get();
+        $fixtures=Fixtures::where('home_score','!=',null)->orderBy('date','desc')->first();
+        // ->where('date','<=',Carbon::now())
+        $nextmatch=Fixtures::where('date','>=',Carbon::now())->first();
+        // dd($fixtures);
+        return view('pages.pages.news-post',compact('posts','fixtures','nextmatch','fixturess','postss'));
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -56,7 +109,9 @@ class HomepageController extends Controller
      */
     public function show($id)
     {
-        //
+        $postdetails=Post::whereId($id)->first();
+        return view('pages.pages.news-detail', compact('postdetails'));
+
     }
 
     /**
