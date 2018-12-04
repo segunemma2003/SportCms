@@ -21,6 +21,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/test1',function(){
     return view('admin.pages.index');
 });
+
+
+Route::get('/pages/pages/index', 'HomepageController@index');
+
+Route::get('/pages/pages/news-detail/{id}', 'HomepageController@show')->name('show');
+Route::get('/pages/pages/news-post', 'HomepageController@post');
 //all routes
 Route::group(['middleware'=>'auth','prefix'=>'admin'],function(){
     // Route::resource('/player','PlayerController');
