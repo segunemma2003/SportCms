@@ -85,3 +85,7 @@ Route::group(['middleware'=>'auth','prefix'=>'admin'],function(){
     Route::post('/allcat/{id}/edit','AllcategoryController@update')->name('allcat.update');    
     Route::get('/allcat/{id}/delete','AllcategoryController@destroy')->name('allcat.delete');
 });
+
+//for detail in news folder
+Route::get('/news/detail', 'HomepageController@detail');
+Route::get('/news/index', 'HomepageController@indexx');

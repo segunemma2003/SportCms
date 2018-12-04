@@ -11,7 +11,7 @@
 <div class="carousel-inner" role="listbox">
 @foreach($posts as $post)
 <div class=" item {{ $loop->first ? 'active' : '' }}">
-	<div class="slide-image"><img src="storage/upload/{{$post->title_image}}" alt="" height="800px"></div>
+	<div class="slide-image"><img src="/storage/upload/{{$post->title_image}}" alt="" height="800px"></div>
 
 
 <div class="position-center-x full-width">
