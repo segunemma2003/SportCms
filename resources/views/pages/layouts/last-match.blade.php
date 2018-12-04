@@ -2,17 +2,17 @@
 <div class="last-matches theme-margin-bottom">
 <h4>Last Match</h4>
 <div class="matches-detail style-2" style="background: url(cdn/img/last-match-bg.jpg) no-repeat; background-size: cover;">
-<p>M. Dikko Stadium<br>
-NPFL18 - MD 3 - Jan 21</p>
+<p>{{$fixtures->venue}}<br>
+{{$fixtures->competitions->nickname}}  {{$fixtures->matchday}} {{ \Carbon\Carbon::parse($fixtures->date)->format('d,M,Y')}}</p>
 <div class="team-btw-match">
 <ul>
 	<li>
-	  <img src="{{ asset('main/images/team-logos/KAT.png') }}" alt="" class="last-match-logo">
-		<span>Katsina<span>2</span></span>
+	  <img src="/storage/upload/{{ $fixtures->homeTeam->file}}" alt="" class="last-match-logo">
+		<span>{{$fixtures->homeTeam->name}}<span>{{$fixtures->home_score}}</span></span>
 	</li>
 	<li>
-		<img src="{{ asset('main/images/team-logos/ENY.png') }}" alt="" class="last-match-logo">
-		<span>Enyimba<span>0</span></span>
+		<img src="/storage/upload/{{ $fixtures->awayTeam->file}}" alt="" class="last-match-logo">
+		<span>{{$fixtures->awayTeam->name}}<span>{{$fixtures->away_score}}</span></span>
 	</li>
 </ul>
 </div>
@@ -26,10 +26,10 @@ NPFL18 - MD 3 - Jan 21</p>
 		<span>29'</span>
 	</li>
 
-	<li>
-		<span>Usman Bara'u</span>
-		<span>68'</span>
-	</li>
+	<!-- // <li>
+	// 	<span>Usman Bara'u</span>
+	// 	<span>68'</span>
+	// </li> -->
 
 
 
