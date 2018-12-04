@@ -93,5 +93,5 @@ Route::group(['middleware'=>'auth','prefix'=>'admin'],function(){
 });
 
 //for detail in news folder
-Route::get('/news/detail', 'HomepageController@detail');
-Route::get('/news/index', 'HomepageController@indexx');
+Route::get('/pages/pages/detail', 'HomepageController@detail');
+Route::get('/pages/pages/indexx', 'HomepageController@indexx');

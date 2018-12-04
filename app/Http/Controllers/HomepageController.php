@@ -30,7 +30,7 @@ class HomepageController extends Controller
     public function indexx()
     {
         $pass=Post::all();
-        return view('news.index', compact('pass'));
+        return view('pages.pages.indexx', compact('pass'));
         // $postdetails=Post::whereId($id)->first();
         // return view('news.index', compact('postdetails'));
     
@@ -46,7 +46,7 @@ class HomepageController extends Controller
          // ->where('date','<=',Carbon::now())
          $nextmatch=Fixtures::where('date','>=',Carbon::now())->first();
          // dd($fixtures);
-         return view('news.detail',compact('posts','fixtures','nextmatch','fixturess','postss'));
+         return view('pages.pages.detail',compact('posts','fixtures','nextmatch','fixturess','postss'));
     }
 
 

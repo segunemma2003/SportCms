@@ -1,5 +1,5 @@
 @extends('pages.layouts.masters')
-@section('title', 'Details')
+@section('title', 'indexx')
 @section('content')
 @include('pages.layouts.slider-holder')
 
