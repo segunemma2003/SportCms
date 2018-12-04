@@ -2,18 +2,6 @@
 @section('title', 'Details')
 @section('content')
 @include('pages.layouts.slider-holder')
-
-
-  
-	<!-- Page Heading & Breadcrumbs  -->
-
-	<!-- Page Heading banner -->
-	
-	<div class="bring-forward" data-appear-top-offset="0" data-parallax="scroll" data-image-src="{{asset ('main/images/parallax-bg/news.jpg') }}"> 
-		<div class="container">
-			<h2 class="ptitle">Club News</h2>
-		</div>
-	</div>
 	
   <!-- Page Heading banner -->
 
