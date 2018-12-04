@@ -46,6 +46,7 @@ class PlayerController extends Controller
             'years_of_contract'=>'required',
             'salary'=>'required',
             'year_signed'=>'required',
+            'position'=>'required'
 
         ]);
         if($request->hasFile('picture')){
@@ -67,7 +68,8 @@ class PlayerController extends Controller
             'salary'=>$request->salary,
             'year_signed'=>$request->year_signed,
             'team_id'=>$request->team_id,
-            'former_club'=>$request->former_club
+            'former_club'=>$request->former_club,
+            'position'=>$request->position
             ]);
         if($player->save()){
             Session::flash('success','Your have successfully added a player');
@@ -136,6 +138,7 @@ class PlayerController extends Controller
         $player->years_of_contract=$request->years_of_contract;
         $player->salary=$request->salary;
         $player->year_signed=$request->year_signed;
+        $player->position=$request->position;
         // $teamc=\App\Team::whereId($request->team_id)->first();
         // $teamf=\App\Team::whereId($request->former_club)->first();
         // dd($teamf);

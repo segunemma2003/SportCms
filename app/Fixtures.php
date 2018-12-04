@@ -25,6 +25,6 @@ class Fixtures extends Model
     }
     public function scorer()
     {
-        return  $this->hasMany('App\Scorer');
+        return  $this->hasMany('App\Scorer','fixture_id');
     }
 }

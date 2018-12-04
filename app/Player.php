@@ -21,6 +21,10 @@ class Player extends Model
     }
     public function scorer()
     {
-        return  $this->hasMany('App\Scorer');
+        return  $this->hasMany('App\Scorer','player_id');
+    }
+    public function assist()
+    {
+        return  $this->hasMany('App\Scorer','assistplayer_id');
     }
 }

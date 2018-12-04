@@ -12,7 +12,11 @@ class Scorer extends Model
 
     public function player()
     {
-        return  $this->belongsTo('App\Player');
+        return  $this->belongsTo('App\Player','player_id');
+    }
+    public function assistname()
+    {
+        return  $this->belongsTo('App\Player','assistplayer_id');
     }
     public function fixture()
     {

@@ -15,7 +15,31 @@
                             </div>
                         </div>
                         <div class='col-md-4'><h2 style="margin:70px;"><span> {{!isset($fixture->home_score)?'?':$fixture->home_score}} </span> VS <span> {{!isset($fixture->away_score)?'?':$fixture->away_score}} </span></h2>
-                                <center><b>{{date($fixture->date)}}</b><br>
+                                
+                                <center>
+                                <div class="rows">
+                                    <div class="col-md-4">
+                                    Scorers:<br>
+                                    @foreach($fixture->scorer as $score)
+                                    {{$score->player['name']}} {{$score->opponentScorer}}
+                                    @endforeach
+                                    </div>
+                                    <div class="col-md-4">
+                                    <br>
+                                    @foreach($fixture->scorer as $score)
+                                    {{$score->time}}
+                                    @endforeach
+                                    </div>
+                                    <div class="col-md-4">
+                                    Assist:<br>
+                                @foreach($fixture->scorer as $score)
+                                {{$score->assistname['name']}} {{$score->opponentAssist}}
+                                
+                                @endforeach
+                                    </div>
+                                </div>
+                               
+                                <b>{{date($fixture->date)}}</b><br>
                                 <b>{{$fixture->time}}</b></center>
                         </div>
                         <div class='col-md-4'>
@@ -43,7 +67,7 @@
                             <label for="home_score" class="col-sm-4 col-form-label text-md-right">{{ __(ucfirst($fixture->homeTeam->name)) }}</label>
 
                             <div class="col-md-4">
-                                <input id="home_score" min="1" type="number" class="form-control{{ $errors->has('home_score') ? ' is-invalid' : '' }}" name="home_score" value="{{ $fixture->home_score }}"  style="width:100px;" required autofocus>
+                                <input id="home_score" min="1" type="number" class="form-control{{ $errors->has('home_score') ? ' is-invalid' : '' }}" name="home_score" value="{{ $fixture->home_score }}"  style="width:100px;" autofocus>
 
                                 
                                
@@ -63,7 +87,7 @@
                         
                             @if(ucfirst($fixture->homeTeam->name)!='Enyimba Fc')
 
-                            <input id="scorer_name" type="" class="form-control{{ $errors->has('scorer_name') ? ' is-invalid' : '' }}" name="scorer_name"  width="5px">
+                            <input id="scorer_name" type="" class="form-control{{ $errors->has('scorer_name') ? ' is-invalid' : '' }}" name="scorer_nameop"  width="5px">
                              @else   
                                 
                                 
@@ -94,7 +118,7 @@
 
                             
                             @if(ucfirst($fixture->homeTeam->name)!='Enyimba Fc')
-                            <input id="assist_name" type="" class="form-control{{ $errors->has('assist_name') ? ' is-invalid' : '' }}" name="assist_name"  width="5px">
+                            <input id="assist_nameop" type="" class="form-control{{ $errors->has('assist_name') ? ' is-invalid' : '' }}" name="assist_nameop"  width="5px">
 
                             @else   
                                 
@@ -155,7 +179,7 @@
                         <div class="form-group row">
                             <label for="away_score" class="col-sm-4 col-form-label text-md-right">{{ __(ucfirst($fixture->awayTeam->name)) }}</label>
                             <div class="col-md-4">
-                            <input id="away_score"  min="1" type="number" class="form-control{{ $errors->has('away_score') ? ' is-invalid' : '' }}" name="away_score" value="{{ $fixture->away_score }}" style="width:100px;" required autofocus>
+                            <input id="away_score"  min="1" type="number" class="form-control{{ $errors->has('away_score') ? ' is-invalid' : '' }}" name="away_score" value="{{ $fixture->away_score }}" style="width:100px;"  autofocus>
 
                                  
                                
@@ -175,7 +199,7 @@
                         
                             @if(ucfirst($fixture->awayTeam->name)!='Enyimba Fc')
 
-                            <input id="scorer_name" type="" class="form-control{{ $errors->has('scorer_name') ? ' is-invalid' : '' }}" name="scorer_name"  width="5px">
+                            <input id="scorer_name" type="" class="form-control{{ $errors->has('scorer_name') ? ' is-invalid' : '' }}" name="scorer_nameop"  width="5px">
                              @else   
                                 
                                 
@@ -206,7 +230,7 @@
 
                             
                             @if(ucfirst($fixture->awayTeam->name)!='Enyimba Fc')
-                            <input id="assist_name" type="" class="form-control{{ $errors->has('assist_name') ? ' is-invalid' : '' }}" name="assist_name"  width="5px">
+                            <input id="assist_name" type="" class="form-control{{ $errors->has('assist_name') ? ' is-invalid' : '' }}" name="assist_nameop"  width="5px">
 
                             @else   
                                 
@@ -236,7 +260,7 @@
                             <label for="minute" class="col-sm-4 col-form-label text-md-right">{{ __("Minute")}}</label>
                             <div class="col-md-4">
 
-                            <input id="minute" type="" class="form-control{{ $errors->has('minute') ? ' is-invalid' : '' }}" name="minute"  width="5px">
+                            <input id="minutes" type="" class="form-control{{ $errors->has('minutes') ? ' is-invalid' : '' }}" name="minutes"  width="5px">
                                 <!-- <option></option>
                                 
                             </select> -->

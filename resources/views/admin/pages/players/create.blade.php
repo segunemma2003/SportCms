@@ -71,6 +71,22 @@
                                 @endif
                             </div>
                         </div>
+                        <!-- position -->
+                        <div class="form-group row">
+                            <label for="position" class="col-sm-4 col-form-label text-md-right">{{ __('Position') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="position" type="text" class="form-control{{ $errors->has('position') ? ' is-invalid' : '' }}" name="position" value="{{ old('position') }}" required autofocus>
+
+                                @if ($errors->has('position'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('position') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <!-- end of position -->
                         <!-- shirt_number -->
                         <div class="form-group row">
                             <label for="shirt_number" class="col-sm-4 col-form-label text-md-right">{{ __('Shirt Number') }}</label>

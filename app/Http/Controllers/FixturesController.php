@@ -75,7 +75,7 @@ class FixturesController extends Controller
      * @param  \App\Fixtures  $fixtures
      * @return \Illuminate\Http\Response
      */
-    public function show(Fixtures $fixtures)
+    public function show($fixtures)
     {
         $fixture=Fixtures::whereId($fixtures)->first();
         return view('admin.pages.fixtures.show',compact('fixture'));
