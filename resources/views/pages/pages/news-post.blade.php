@@ -1,7 +1,7 @@
-@extends('pages.layouts.masters')
+@extends('pages.layouts.newsmaster')
 @section('title','The Official Website of Enyimba Football Club')
 @section('content')
-@include('pages.layouts.slider-holder')
+
 	<!-- Main Content -->
 	<main class="main-content">
 

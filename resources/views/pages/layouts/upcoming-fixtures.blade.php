@@ -10,22 +10,21 @@
 
 	<td></td>
 	<td><img src="/storage/upload/{{$fixture->homeTeam->file}}" alt="" width="36" height="36" class="monthly-fixture-logo"> {{$fixture->homeTeam->name}}</td>
-	<td class="grey-text" style="text-align: center"> <?php
-	if($fixture->home_score==null){ 
-		echo "?";
-	}else if($fixture->home_score=="0"){
-		echo "0";
-	}else{
-		echo $fixture->home_score;
-	}?>
-		 -<?php
-		  if($fixture->away_score==null){ 
-			  echo "?";
-		 }else if($fixture->away_score=="0"){
-			 echo "0";
-		 }else{
-			 echo $fixture->away_score;
-		 }?> </td>
+	<td class="grey-text" style="text-align: center"> 
+	@if($fixture->home_score==null) 
+		{{\Carbon\Carbon::parse($fixture->date)->format('M,d')}}
+	@elseif($fixture->home_score=="0")
+		{{"0"}} {{'-'}}
+	@else
+		{{$fixture->home_score}} {{'-'}}
+	@endif
+	
+		 @if($fixture->away_score=="0")
+			 {{"0"}}
+		 @else
+			{{$fixture->away_score}}
+		@endif
+		  </td>
 	<td><img src="/storage/upload/{{$fixture->awayTeam->file}}" alt="" width="36" height="36" class="monthly-fixture-logo"> {{$fixture->awayTeam->name}} </td>
 
 	<td></td>

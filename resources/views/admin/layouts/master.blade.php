@@ -14,18 +14,24 @@
     <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet" />
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 </head>
 <body>
     <div class="wrapper">
         <!-- navbar -->
+        @include('sweet::alert')
+
         @include('admin.layouts.navbar')
         @if(auth()->check())
         @include('admin.layouts.sidebar')
         @endif
         @yield('content')
     </div>
+
     <!-- script -->
     <script src="{{ asset('assets/js/jquery-1.10.2.js') }}"></script>
+
+    <script src="{{ asset('js/sweetalert.min.js') }}"></script>
       <!-- BOOTSTRAP SCRIPTS -->
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
     <!-- METISMENU SCRIPTS -->

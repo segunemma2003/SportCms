@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="{{asset('main/css/animate.css')}}">
 <link rel="stylesheet" href="{{asset('main/css/transition.css')}}">
 <link rel="stylesheet" href="{{asset('main/css/font-awesome.min.css')}}">
-<link rel="stylesheet" href="{{asset('main/style.css')}}">
+<link rel="stylesheet" href="{{asset('main/css/style.css')}}">
 <link rel="stylesheet" href="{{asset('main/css/color.css')}}">
 <link rel="stylesheet" href="{{asset('cdn/css/mystyle.css')}}">
 <link rel="stylesheet" href="{{asset('main/css/responsive.css')}}">
@@ -38,6 +38,7 @@
 <!-- LayerSlider -->
 <!-- LayerSlider stylesheet -->
 <link rel="stylesheet" href="{{ asset('layerslider/css/layerslider.css') }}" type="text/css">
+
  
 <!-- External libraries: jQuery & GreenSock -->
 <script src="{{ asset('layerslider/js/jquery.js') }}" type="text/javascript"></script>
@@ -46,11 +47,12 @@
 <!-- LayerSlider script files -->
 <script src="{{ asset('layerslider/js/layerslider.transitions.js') }}" type="text/javascript"></script>
 <script src="{{ asset('layerslider/js/layerslider.kreaturamedia.jquery.js') }}" type="text/javascript"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 <!-- LayerSlider plugin files -->
 	<link rel="stylesheet" href="{{ asset('layerslider/plugins/popup/layerslider.popup.css') }}">
 	<script src="{{ asset('layerslider/plugins/popup/layerslider.popup.js') }}"></script>
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <script src="{{ asset('js/sweetalert.min.js') }}"></script>
 
 
 </head>
@@ -61,6 +63,7 @@
 
 	<!-- Header -->
 	<header class="header style-3">
+	@include('sweet::alert')
 
 		<!-- Top bar -->
 		

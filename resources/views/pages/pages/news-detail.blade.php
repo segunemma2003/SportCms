@@ -1,7 +1,6 @@
-@extends('pages.layouts.masters')
+@extends('pages.layouts.newsmaster')
 @section('title','The Official Website of Enyimba Football Club')
 @section('content')
-@include('pages.layouts.slider-holder')
 	<!-- Main Content -->
 	<main class="main-content">
 		<!-- Blog Detail -->
@@ -13,7 +12,7 @@
 				<!-- Blog detail -->
 						<div class="blog-detail-holder">
 							<div class="author-header">
-								<h2>{{$postdetails->title}}</h2>
+								<h2>{!!$postdetails->title!!}</h2>
 								<div class="aurhor-img-name pull-left">
 									<img src="{{asset('cdn/img/author-avatar.png')}}" alt="">
 									<strong>by {{$postdetails->user->name}}</strong>
@@ -41,7 +40,7 @@
 								</figure>
                                 <div class="image-desc"><?php //echo($rsNews->getColumnVal("ImageDesc")); ?></div>
                                 
-								<article>{{$postdetails->body}}		  
+								<article>{!!$postdetails->body!!}		  
 								</article>
 							</div>
 							<div class="tags-holder">
@@ -101,15 +100,15 @@
 							<h3><span>Other News</span></h3>
 							<div class="Popular-news">
 								<ul>
-									<?php //while(!$rsNewsList->atEnd()) { ?>
-								    <li>
-									    <img src="<?php //echo($rsNewsList->getColumnVal("Image")); ?>" alt="" width="60" height="48">
-									    <h5><a href="news-detail.php?newsID=<?php //echo($rsNewsList->getColumnVal("newsID")); ?>"><?php //echo($rsNewsList->getColumnVal("Title")); ?></a></h5>
-									    <span class="red-color"><i class="fa fa-clock-o"></i><?php //echo shortdate($rsNewsList->getColumnVal("Date")); ?></span>
-								      </li>
-									  <?php
-  //$rsNewsList->moveNext();}
-//$rsNewsList->moveFirst(); //return RS to first record?>
+								@foreach($posts as $post)									
+								 	<li>
+									 	
+
+										<img src="/storage/upload/{{$post->title_image}}" alt="" width="60" height="48">
+									    <h5><a href="{{route('show', $post->id)}}">{{$post->title}}</a></h5>
+									    <span class="red-color"><i class="fa fa-clock-o"></i>{{$post->created_at->diffForhumans()}}</span>
+								    </li>	
+								@endforeach		
 									
 									
 									

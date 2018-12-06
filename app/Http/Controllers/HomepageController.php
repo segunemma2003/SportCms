@@ -5,6 +5,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Fixtures;
+use App\Player;
+use Alert;
 class HomepageController extends Controller
 {
     /**
@@ -24,7 +26,9 @@ class HomepageController extends Controller
         // ->where('date','<=',Carbon::now())
         $nextmatch=Fixtures::where('date','>=',Carbon::now())->first();
         // dd($fixtures);
-        return view('pages.pages.index',compact('posts','fixtures','nextmatch','fixturess','postss'));
+        $allplayers=Player::inRandomOrder()->get();
+        Alert::message('hello','guy');
+        return view('pages.pages.index',compact('posts','fixtures','nextmatch','fixturess','postss','allplayers'));
     }
 
     public function indexx()

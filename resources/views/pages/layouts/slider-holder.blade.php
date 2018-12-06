@@ -12,17 +12,13 @@
 @foreach($posts as $post)
 <div class=" item {{ $loop->first ? 'active' : '' }}">
 	<div class="slide-image"><img src="/storage/upload/{{$post->title_image}}" alt="" height="800px"></div>
-<<<<<<< HEAD
 
-=======
->>>>>>> ed633e00d2ecfcd7582d005f4a285dc7f8e61bc1
-
-<div class="position-center-x full-width">
+	<div class="position-center-x full-width">
 <div class="container">
 <div class="banner-caption style-1 p-white h-white pull-left">
 <h1 class="animated fadeInUp delay-1s">{!!$post->title!!}</h1>
 <p class="animated fadeInUp delay-2s">{!!$post->summary!!}</p>
-<a class="btn lg red-btn animated fadeInRight delay-3s" href="#"><i>+</i>Read More</a>
+<a class="btn lg red-btn animated fadeInRight delay-3s" href="{{route('show', $post->id)}}"><i>+</i>Read More</a>
 </div>
 </div>
 </div>
